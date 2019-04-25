@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import FurniturePiece from "./FurniturePiece";
-import Color from "./Color";
+import ColorFilter from "./ColorFilter";
 import PropTypes from "prop-types";
+
 const urlApi = `https://it771mq5n2.execute-api.us-west-2.amazonaws.com/production/furniture`;
 
 class FurnitureList extends Component {
@@ -24,6 +25,7 @@ class FurnitureList extends Component {
       requestFailed: false,
       selectedFurnitureFinal: []
     };
+    this.selectColor = this.selectColor.bind(this);
   }
 
   selectColor(color) {
@@ -61,22 +63,22 @@ class FurnitureList extends Component {
     let data = this.state.data.body.data;
     var selectedFurniture = [];
 
-    data.forEach(furniture => {
-      if (
-        (!this.state.selectedColor && !this.state.selectedType) ||
-        furniture.colors.includes(this.state.selectedColor) ||
-        furniture.type == this.state.selectedType
-      ) {
-        console.log(this);
-        selectedFurniture.push(furniture);
-      }
-    });
-
     setTimeout(() => {
+      data.forEach(furniture => {
+        if (
+          (!this.state.selectedColor && !this.state.selectedType) ||
+          furniture.colors.includes(this.state.selectedColor) ||
+          furniture.type == this.state.selectedType
+        ) {
+          selectedFurniture.push(furniture);
+        }
+      });
+
       this.setState({
         selectedFurnitureFinal: selectedFurniture
       });
-    }, 20);
+      console.log(this.state.selectedFurnitureFinal);
+    }, 1);
   }
 
   render() {
@@ -86,7 +88,7 @@ class FurnitureList extends Component {
     //also changed "data" on line 62 to selectedFurniture function
     return (
       <div>
-        <div className="flexBox">
+        {/* <div className="flexBox">
           {this.state.colors.map((color, index) => (
             <div key={index}>
               <div
@@ -97,67 +99,16 @@ class FurnitureList extends Component {
               </div>
             </div>
           ))}
+        </div> */}
+        <div>
+          <h4 className="instructions">
+            Double click the colors to search furniture.
+          </h4>
+          <ColorFilter
+            colors={this.state.colors}
+            selectColor={this.selectColor}
+          />
         </div>
-        <style jsx>{`
-          .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-          }
-    
-        .flexBox {
-          display: grid;
-          grid-template-columns: repeat(9, 1fr);
-          text-align: center;
-        }
-        .button {
-          padding: 30px;
-          margin: 10px;
-          text-align: center;
-        }
-        .button0 {
-            background-color: tan;
-        }
-        .button1 {
-            background-color: black;
-            color: white;
-        }
-        .button2 {
-            background-color: white;
-            color: black;
-        }
-        .button3{
-            background-color: red;
-            color: white;
-        }
-        .button4{
-            background-color: yellow;
-        }
-        .button5{
-            background-color: brown;
-            color: white;
-        }
-        .button6{
-            background-color: purple;
-            color: white;
-        }
-        .button7{
-            background-color: olive;
-            color: white;
-        }
-        .button8{
-            background-color: green;
-            color: white;
-        }
-        "tan",
-    "black",
-    "white",
-    "red",
-    "yellow",
-    "brown",
-    "purple",
-    "olive",
-    "green"
-        `}</style>
         <div className="grid">
           {this.state.selectedFurnitureFinal.map((item, itemIndex) => (
             <FurniturePiece
