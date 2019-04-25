@@ -8,6 +8,7 @@ function Navbar() {
         div {
           background-color: blue;
           padding: 10px 0 10px 0;
+          margin-right: 0px;
         }
         button {
           padding: 15px;
