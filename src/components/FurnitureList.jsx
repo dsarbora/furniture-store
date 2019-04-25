@@ -22,6 +22,7 @@ class FurnitureList extends Component {
         "olive",
         "green"
       ],
+      
       requestFailed: false,
       selectedFurnitureFinal: []
     };
