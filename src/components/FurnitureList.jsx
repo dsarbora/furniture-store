@@ -33,29 +33,29 @@ class FurnitureList extends Component {
     this.selectedFurniture();
   }
 
-  // componentDidMount() {
-  //   fetch(urlApi)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw Error("Network request failed");
-  //       }
-  //       return response;
-  //     })
-  //     .then(d => d.json())
-  //     .then(
-  //       d => {
-  //         this.setState({
-  //           data: d,
-  //           selectedFurnitureFinal: d.body.data
-  //         });
-  //       },
-  //       () => {
-  //         this.setState({
-  //           requestFailed: true
-  //         });
-  //       }
-  //     );
-  // }
+  componentDidMount() {
+    fetch(urlApi)
+      .then(response => {
+        if (!response.ok) {
+          throw Error("Network request failed");
+        }
+        return response;
+      })
+      .then(d => d.json())
+      .then(
+        d => {
+          this.setState({
+            data: d,
+            selectedFurnitureFinal: d.body.data
+          });
+        },
+        () => {
+          this.setState({
+            requestFailed: true
+          });
+        }
+      );
+  }
 
   selectedFurniture() {
     let data = this.state.data.body.data;
@@ -80,8 +80,8 @@ class FurnitureList extends Component {
   }
 
   render() {
-    // if (this.state.requestFailed) return <p>Failed!</p>;
-    // if (!this.state.data) return <p>Loading...</p>;
+    if (this.state.requestFailed) return <p>Failed!</p>;
+    if (!this.state.data) return <p>Loading...</p>;
     //var data = this.state.data.body.data;
     //also changed "data" on line 62 to selectedFurniture function
     return (
