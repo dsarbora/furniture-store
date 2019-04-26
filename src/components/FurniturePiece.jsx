@@ -15,8 +15,8 @@ function FurniturePiece(props) {
           color: black;
         }
         .frame:hover {
-          transform: scale(1.05);
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+          transform: scale(1.15);
+          box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.2);
         }
         .head {
           text-align: center;
