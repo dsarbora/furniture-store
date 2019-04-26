@@ -22,7 +22,7 @@ class FurnitureList extends Component {
         "olive",
         "green"
       ],
-      
+
       requestFailed: false,
       selectedFurnitureFinal: []
     };
@@ -33,7 +33,17 @@ class FurnitureList extends Component {
     this.setState({
       selectedColor: color
     });
+    console.log(this.props);
     this.selectedFurniture();
+  }
+
+  selectType() {
+    this.setState({
+      selectedType: this.props.selectedType
+    });
+    setTimeout(() => {
+      this.selectedFurniture();
+    }, 0);
   }
 
   componentDidMount() {
@@ -78,8 +88,7 @@ class FurnitureList extends Component {
       this.setState({
         selectedFurnitureFinal: selectedFurniture
       });
-      console.log(this.state.selectedFurnitureFinal);
-    }, 1);
+    }, 0);
   }
 
   render() {
@@ -101,6 +110,7 @@ class FurnitureList extends Component {
             </div>
           ))}
         </div> */}
+        <button onClick={() => this.selectType()}>GO</button>
         <div>
           <h4 className="instructions">
             Double click the colors to search furniture.
