@@ -31,15 +31,18 @@ class FurnitureList extends Component {
 
   selectColor(color) {
     this.setState({
-      selectedColor: color
+      selectedColor: color,
+      selectedType: ""
     });
-    console.log(this.props);
-    this.selectedFurniture();
+    setTimeout(() => {
+      this.selectedFurniture();
+    });
   }
 
   selectType() {
     this.setState({
-      selectedType: this.props.selectedType
+      selectedType: this.props.selectedType,
+      selectedColor: ""
     });
     setTimeout(() => {
       this.selectedFurniture();
@@ -70,7 +73,7 @@ class FurnitureList extends Component {
       );
   }
 
-  selectedFurniture() {
+  selectedFurniture(input) {
     let data = this.state.data.body.data;
     var selectedFurniture = [];
 
@@ -98,18 +101,12 @@ class FurnitureList extends Component {
     //also changed "data" on line 62 to selectedFurniture function
     return (
       <div>
-        {/* <div className="flexBox">
-          {this.state.colors.map((color, index) => (
-            <div key={index}>
-              <div
-                onClick={() => this.selectColor(color)}
-                className={"button" + index + " button"}
-              >
-                {color}
-              </div>
-            </div>
-          ))}
-        </div> */}
+        <style jsx>{`
+          .grid {
+            display: flex;
+            flex-wrap: wrap;
+          }
+        `}</style>
         <button onClick={() => this.selectType()}>GO</button>
         <div>
           <h4 className="instructions">
